@@ -7,6 +7,12 @@
     @apply cursor-pointer hover:underline;
   }
   .btn {
-    @apply p-2 text-sm bg-gradient-to-b from-yellow-200 to-yellow-400 rounded focus:outline-none focus:ring-yellow-500 active:from-yellow-500;
+    @apply px-10 py-2 text-sm bg-gradient-to-b from-yellow-200 to-yellow-400 rounded focus:outline-none focus:ring-yellow-500 active:from-yellow-500;
   }
+  .btngray {
+    @apply px-10 py-2 text-sm bg-gray-500 hover:bg-gray-600 rounded focus:outline-none shadow-sm;
+  }
+}
+* {
+  font-family: SF Pro Display, Poppins, "Courier New", Courier, monospace;
 }

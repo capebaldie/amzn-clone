@@ -2,47 +2,67 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { TbShoppingCartX } from "react-icons/tb";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectItems } from "../slices/basketSlice";
 
 const NavBar = () => {
+  const { data: session } = useSession();
+
+  //* products in the redux store is now passed in items var
+
+  const router = useRouter();
+  const items = useSelector(selectItems);
+
   return (
     <header>
       <div className="flex items-center bg-amazon_blue h-[3.5rem]">
         <div className="flex items-center flex-grow sm:flex-grow-0">
           <img
-            className="w-[120px] h-[80px] object-contain cursor-pointer"
-            src="https://png2.cleanpng.com/sh/2ef94c63facddffc465c9cf69968cd9a/L0KzQYm3V8IyN5h1fpH0aYP2gLBuTfFuaat0hp9sb32wcsPojvQudJDsh59uLXPyfb7skvNmNZR6iAZ4bXX1Pbr1lPVzdpJ5gdH3YXywhrFzlf51bZZ3gdDwLUXlRYS7hPM3O2M9TtQBLki7QoOCUcM2OWY4SqMDNkC4RIO3V75xdpg=/kisspng-amazon-com-brand-logo-e-commerce-customer-international-volunteering-5b534dc63286b6.882291351532186054207.png"
+            onClick={() => {
+              router.push("/");
+            }}
+            className="w-[120px] h-[80px] object-contain cursor-pointer pt-2 pl-2"
+            src="https://links.papareact.com/f90"
             alt="logo"
           />
         </div>
         <div className="hidden sm:flex items-center rounded bg-yellow-400 hover:bg-yellow-500 flex-grow cursor-pointer mx-2">
           <input
-            className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
+            className="p-3 h-full w-6 flex-grow flex-shrink rounded-l focus:outline-none px-4"
             type="text"
           />
           <BsSearch className="h-9 w-auto p-2" />
         </div>
 
-        <div className="text-white flex items-center text-xs space-x-6 mx-4">
-          <div className="link">
-            <p>Hello amal</p>
-            <p>Account & Lists</p>
+        <div className="text-white flex items-center text-xs space-x-6 mx-2 sm:mx-4">
+          {/* if there is a user sign out else sign in */}
+          <div onClick={!session ? signIn : signOut} className="link">
+            <p>{session ? `Hello ${session.user.name}` : `Sign In`}</p>
+            <p className="font-bold">Account & Lists</p>
           </div>
           <div className="link">
             <p>Returns</p>
-            <p>& Orders</p>
+            <p className="font-bold">& Orders</p>
           </div>
-          <div className=" relative link flex items-center">
+          <div
+            onClick={() => {
+              router.push("/checkout");
+            }}
+            className=" relative link flex items-center"
+          >
             <span className="absolute top-0 right-5 h-4 w-4 bg-yellow-400 rounded-full text-center font-bold text-black">
-              0
+              {items.length}
             </span>
             <TbShoppingCartX className="h-8 w-auto" />
-            <p> Cart</p>
+            <p className="font-bold"> Cart</p>
           </div>
         </div>
       </div>
       <div className="md:hidden flex items-center bg-yellow-400 hover:bg-yellow-500 flex-grow cursor-pointer">
         <input
-          className="p-2 h-full w-6 flex-grow flex-shrink focus:outline-none px-4"
+          className="p-3 h-full w-6 flex-grow flex-shrink focus:outline-none px-4"
           type="text"
         />
         <BsSearch className="h-9 w-auto p-2" />
