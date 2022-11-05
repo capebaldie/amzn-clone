@@ -16,7 +16,7 @@ const NavBar = () => {
   const items = useSelector(selectItems);
 
   return (
-    <header>
+    <header className="sticky top-0 z-40">
       <div className="flex items-center bg-amazon_blue h-[3.5rem]">
         <div className="flex items-center flex-grow sm:flex-grow-0">
           <img

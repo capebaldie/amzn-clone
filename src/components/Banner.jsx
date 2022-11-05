@@ -4,8 +4,8 @@ import { Carousel } from "react-responsive-carousel";
 
 const Banner = () => {
   return (
-    <div className="relative">
-      <div className="absolute w-full bg-gradient-to-t h-32 from-gray-100 bottom-0 z-20" />
+    <div className="relative ">
+      <div className="absolute w-full bg-gradient-to-t h-32 from-gray-100 bottom-0 z-30" />
       <Carousel
         autoPlay
         infiniteLoop
@@ -14,7 +14,7 @@ const Banner = () => {
         showIndicators={false}
         interval={3000}
       >
-        <div>
+        <div className="">
           <img
             loading="lazy"
             src="https://m.media-amazon.com/images/I/51O6w2srBuL._SX3000_.jpg"
